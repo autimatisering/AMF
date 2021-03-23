@@ -69,6 +69,18 @@ async function loadJSModule(name, htmlDestination, ...constructorParams) {
     }
 }
 
+/// Adds the css file associated with the module
+/// Params:  filePath - String path to the js file
+///          name     - String name of the module
+/// Return:  void
+function loadCSSModule(filepath, name) {
+    var link = document.createElement('link');    // Prepare a new link element
+    link.href = filepath;                         // Set the src of the new script element to the JS file
+    link.id = `${name}-moduleCSS`;                // Set a classname if provided for identification purposes
+    link.rel = "stylesheet"                       // Set the rel of the link element
+    document.head.appendChild(link);              // Add the script element to the head of the DOM       
+}
+
 /// Prepares a JS file and appends it to the DOM head so it can be made
 /// Params:  filePath - String path to the js file
 ///          name     - String name of the module
