@@ -1,0 +1,97 @@
+    <div class="container-fluid">
+
+        <div class="card">
+
+            <div class="card-header"> <img style="padding-top: -10p; margin-right: 10px;" src="{iconurl}"/> <strong>{stationname}</strong> <div class="float-right text-muted">{time}</div></div>
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-6">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-6">Temperatuur :</div>
+                                    <div class="col-6">{temperature}c</div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-6">Gevoelstemperatuur :</div>
+                                    <div class="col-6">{feeltemperature}c</div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-6">Grondtemperatuur :</div>
+                                    <div class="col-6">{groundtemperature}c</div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-6">Regen :</div>
+                                    <div class="col-6">{rainFallLastHour}mm <span class="text-muted">(24h : {rainFallLast24Hour}mm)</span></div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-6">Zonintensiteit :</div>
+                                    <div class="col-6">{sunpower} ??????????????</div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-6">Luchtdruk :</div>
+                                    <div class="col-6">{airpressure} hPa</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-6">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-6">Beschrijving :</div>
+                                    <div class="col-6">{weatherdescription}</div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-6">Luchtvochtigheid :</div>
+                                    <div class="col-6">{humidity}%</div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-6">Windkracht :</div>
+                                    <div class="col-6">{windspeedBft} m/s</div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-6">Windrichting :</div>
+                                    <div class="col-6">{winddirection} <span class="text-muted">({winddirectiondegrees}°)</span></div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-6">Windstoten :</div>
+                                    <div class="col-6">{windgusts}km/u</div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-6">Zicht :</div>
+                                    <div class="col-6">{visibility}km</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>

@@ -5,3 +5,7 @@
 function getFirstClass(scope, className) {
     return scope.getElementsByClassName(className)[0]
 }
+
+function getElementsByClass(scope, className) {
+    return scope.getElementsByClassName(className)
+}
