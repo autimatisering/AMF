@@ -5,9 +5,13 @@
 // generate tag list
 // optimize regex
 
+
 class StateManager {
 
     constructor (rootNode, state = {}){
+
+        let d = new Date()
+
         this.rootNode = rootNode // module node
         this.originalHTML = rootNode.innerHTML // needs to be saved to continually update {var} tags
         this.state = state
@@ -15,11 +19,12 @@ class StateManager {
         this.tagPattern = /{(\s?)[a-zA-Z0-9+]*(\s?)}/g; // { tagname } {tagname} { tagname} {tagname }
         this.taglist = this.originalHTML.match(this.tagPattern).map((match) => match.replace("{","").replace("}","").trim())
 
-        console.log(this.taglist)
-
         if(state !== {}){ // if state is not empty set and replace vars
             this.setState(state)
         }
+
+        let s = new Date();
+        console.log("Construct Time", (s - d))
 
         //this.clearOriginalTags()
 
@@ -31,6 +36,8 @@ class StateManager {
     }
 
     setState (newState) { // setter for state
+
+        let d = new Date()
         let newHTML = this.originalHTML;
         return new Promise((resolve,reject) => {
             try{
@@ -48,6 +55,10 @@ class StateManager {
                 })
 
                 this.rootNode.innerHTML = newHTML; // replace html in rootnode
+
+                let s = new Date();
+                console.log("SetState Time", (s - d))
+
                 resolve(this.state)
 
             }catch(error){
@@ -83,7 +94,7 @@ ModuleRespository.WeatherEindhoven =  (id, rootNode) => {
     this.sm = new StateManager(this.rootNode)
 
     // module options
-    this.updateTime = 5 * 60 * 1000 // every 5 minutes refetch data
+    this.updateTime = 1  * 1000 // every 5 minutes refetch data
     this.APIURL  = "https://data.buienradar.nl/2.0/feed/json";
 
 
@@ -117,7 +128,6 @@ ModuleRespository.WeatherEindhoven =  (id, rootNode) => {
 
 
                 self.sm.setState({ time: new Date().toUTCString(), ...eindhoven})
-                console.log(self.sm.state)
             }
         };
         xhttp.open("GET", url, true);
