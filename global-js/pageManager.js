@@ -4,7 +4,7 @@
 
 /// Load the default theme and default page
 loadTheme("Dark")
-loadModule("WeatherEindhoven", document.body) // <=== for testing purposes
+loadModule("demo", document.body) // <=== for testing purposes
 
 /// Loads an HTML file and it's associated JS file, then appends the HTML in the innerHTML of the destination element
 /// The JS file gets appended to the head of the DOM

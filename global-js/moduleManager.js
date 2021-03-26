@@ -34,7 +34,7 @@ var Modules = {
 /// Return:  void
 function moduleExecute(callerElement, functionName, ...params) {
     let targetModule = findAssociatedModule(callerElement)      // find the module associated with the caller
-    targetModule[functionName].apply(targetModule, params)   // execute the function of the module as though it were called directly
+    targetModule[functionName].apply(targetModule, ...params)   // execute the function of the module as though it were called directly
 }
 
 /// recursively go down the html tree until we find a module root element
