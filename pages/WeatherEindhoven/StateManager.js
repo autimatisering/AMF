@@ -1,11 +1,4 @@
-// Martin
-// 22/03/2021
-//
-
-// generate tag list
-// optimize regex
-
-class StateManager {
+export default class StateManager {
 
     constructor (rootNode, state = {}){
         this.rootNode = rootNode // module node
@@ -69,74 +62,4 @@ class StateManager {
         }
     }
 
-}
-
-
-
-// Append the WeatherEindhoven module to the modules the moment this file gets loaded
-ModuleRespository.WeatherEindhoven =  (id, rootNode) => {
-    this.moduleName = "WeatherEindhoven"
-    this.rootNode = rootNode
-    this.originalHTML = rootNode.innerHTML
-    this.id = id
-
-    this.sm = new StateManager(this.rootNode)
-
-    // module options
-    this.updateTime = 5 * 60 * 1000 // every 5 minutes refetch data
-    this.APIURL  = "https://data.buienradar.nl/2.0/feed/json";
-
-
-    this.construct = () => {
-        this.updateLoop()
-    }
-
-    this.updateLoop = () => {
-        this.getWeather();
-        const self = this;
-
-        setTimeout(() => {
-            self.updateLoop()
-        }, this.updateTime);
-    }
-
-
-    this.getURL = (url) => {
-        var xhttp = new XMLHttpRequest();
-        let self = this
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-
-                let data = JSON.parse(xhttp.responseText);
-                let eindhoven = data.actual.stationmeasurements[6]
-
-
-                // omrekenen waardes
-                eindhoven.windgusts = (eindhoven.windgusts * 3.6).toPrecision(4)  // meter per second to km/h
-                eindhoven.visibility = (eindhoven.visibility / 1000).toPrecision(4) // not sure about this. km/h
-
-
-                self.sm.setState({ time: new Date().toUTCString(), ...eindhoven})
-                console.log(self.sm.state)
-            }
-        };
-        xhttp.open("GET", url, true);
-        xhttp.send();
-    }
-
-
-    this.getWeather = () => {
-        try {
-            this.getURL(this.APIURL)
-        }catch(error){
-            this.error = error
-            console.error(error);
-        }
-    }
-
-
-
-    this.construct();
-
-    return this
 }
