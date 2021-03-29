@@ -7,4 +7,7 @@ ModuleRespository.demo = function () {
     this.moduleName = "demo"
 
     getFirstClass(this.rootNode, "demo").innerHTML = "AMF appears to be working correctly";
+    loadJSModule("subDemo", "pages/demo", false, this.id)
+
+    return this;
 }

@@ -19,7 +19,7 @@ var Modules = {
     ///          htmlDestination - a html element on the page that the module is loaded into
     /// Return:  void
     addModule: function (moduleConstructor, params, destination) {
-       
+
         let module = new Object()                                       // prepare a new object to house the module instance
         module.id = this.counter+1;                                     // set the id of the module
         let parentModule
@@ -32,9 +32,12 @@ var Modules = {
             destination.id = `${this.counter+1}`                                    // update the id of the htmlDestination element
         }
         else if (Number.isInteger(destination))             // if the destination is an integer
+        {
             parentModule = this[destination]                // get the module from the list
+        }
         else                                                // otherwise
             console.error("invalid destination provided")   // throw error
+
 
         if (parentModule)                                   // if we have a parent module
         {
@@ -45,6 +48,9 @@ var Modules = {
         }
 
         module = moduleConstructor.apply(module, params)    // create the module
+
+        if (!module)
+            console.error("Constructor didn't return anything, be sure to add 'return this' at the end of your module")
 
         this[this.counter+1] = module;                      // store the created module in the list
         this.counter+= 1;                                   // up the counter so the next module will also have a unique number
