@@ -6,22 +6,28 @@
 loadTheme("Dark")
 loadModule("demo", document.body) // <=== for testing purposes
 
+var loadedTheme = "";
+
 /// Loads an HTML file and it's associated JS file, then appends the HTML in the innerHTML of the destination element
 /// The JS file gets appended to the head of the DOM
 /// Params:  filePath - String path to the js file
 /// Return:  Promise that will resolve when the JS is loaded and appended
 async function loadModule(filename, htmlDestination, ...moduleParams) {
+    if (htmlDestination.id)
+        unloadJSModule(Modules[htmlDestination.id])
+
     console.log(`loading ${filename}`)
     let htmlpromise = loadHTML(`/pages/${filename}/${filename}.html`);          // Load HTML
     htmlpromise.then((v) => {htmlDestination.innerHTML = v});                   // Add the HTML to the destination element
     await htmlpromise;                                                          // Wait for the HTML before loading the JS
-    loadJSModule(filename, htmlDestination, moduleParams)                       // Load JS
+    loadJSModule(filename, `pages/${filename}`, true, htmlDestination, moduleParams) // Load JS
 }
 
 /// Sets the href of a link element in the head to change the theme
 /// Params: Name of the theme (without extension or any of the sort)
 /// Return: void
 function loadTheme(name) {
+    loadedTheme = name;
     document.getElementById("CSSThemeFile").setAttribute("href", `/css/themes/${name}.css`)
 }
 

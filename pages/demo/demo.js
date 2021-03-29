@@ -3,10 +3,8 @@
 //
 
 // Append the demo module to the modules the moment this file gets loaded
-ModuleRespository.demo = function (id, rootNode) {
+ModuleRespository.demo = function () {
     this.moduleName = "demo"
-    this.rootNode = rootNode
-    this.id = id
 
-    getFirstClass(rootNode, "demo").innerHTML = "AMF appears to be working correctly";
+    getFirstClass(this.rootNode, "demo").innerHTML = "AMF appears to be working correctly";
 }
