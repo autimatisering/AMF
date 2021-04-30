@@ -67,6 +67,16 @@ function moduleExecute(callerElement, functionName, ...params) {
     targetModule[functionName].apply(targetModule, params)   // execute the function of the module as though it were called directly
 }
 
+/// executes a callback as part of a module
+/// Params:  callerElement  - the HTML element that called this function
+///          callback       - the the callback function to be called
+///          ...params      - the parameters to be send to the callback
+/// Return:  void
+function callbackExecute(callerElement, callback, ...params) {
+    let targetModule = findAssociatedModule(callerElement)   // find the module associated with the caller
+    callback.apply(targetModule, params)                     // execute the function of the module as though it were called directly
+}
+
 /// recursively go down the html tree until we find a module root element
 /// Params:  element    - the HTML element within a module block
 /// Return:  object     - the module associated with the element
