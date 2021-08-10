@@ -18,8 +18,8 @@ var Modules = {
     /// Params:  module          - an instance of a JS module
     ///          htmlDestination - a html element on the page that the module is loaded into
     /// Return:  void
-    addModule: function (moduleConstructor, params, destination) {
-
+    addModule: function (moduleConstructor, params, destination, modulePath) {
+       
         let module = new Object()                                       // prepare a new object to house the module instance
         module.id = this.counter+1;                                     // set the id of the module
         let parentModule
@@ -29,15 +29,13 @@ var Modules = {
             if (destination.tagName != "BODY")                                      // if the module is not being loaded into the body element
                 parentModule = findAssociatedModule(destination.parentElement)      // find the parent module
             module.rootNode = destination;                                          // set root node of the module
+            module.modulePath = modulePath                                          // set the path to the module
             destination.id = `${this.counter+1}`                                    // update the id of the htmlDestination element
         }
         else if (Number.isInteger(destination))             // if the destination is an integer
-        {
             parentModule = this[destination]                // get the module from the list
-        }
         else                                                // otherwise
             console.error("invalid destination provided")   // throw error
-
 
         if (parentModule)                                   // if we have a parent module
         {
@@ -54,6 +52,7 @@ var Modules = {
 
         this[this.counter+1] = module;                      // store the created module in the list
         this.counter+= 1;                                   // up the counter so the next module will also have a unique number
+        return module
     }
 };
 
@@ -76,6 +75,7 @@ function callbackExecute(callerElement, callback, ...params) {
     let targetModule = findAssociatedModule(callerElement)   // find the module associated with the caller
     callback.apply(targetModule, params)                     // execute the function of the module as though it were called directly
 }
+
 
 /// recursively go down the html tree until we find a module root element
 /// Params:  element    - the HTML element within a module block
@@ -108,7 +108,7 @@ async function loadJSModule(name, path, loadCSS, destination, ...constructorPara
 
     if (ModuleRespository[name]) {                                 // if the module was successfully loaded
         ModuleRespository[`${name}InstanceCounter`]+=1             // add 1 to the counter for this module
-        Modules.addModule(ModuleRespository[name], constructorParams.flat(), destination) // add a new instance of the module
+        return Modules.addModule(ModuleRespository[name], constructorParams.flat(), destination, path) // add a new instance of the module
     }
     else
     {
@@ -150,6 +150,9 @@ function loadCSSModule(filepath, name) {
 /// Return: success boolean
 function unloadJSModule(module) {
     try {
+
+        if (module.destructor)
+            module.destructor()
 
         // if there are nested modules
         if (module.nestedModules && module.nestedModules.length > 0)

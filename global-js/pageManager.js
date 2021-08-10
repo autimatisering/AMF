@@ -4,9 +4,7 @@
 
 /// Load the default theme and default page
 loadTheme("Dark")
-loadModule("demo", document.body) // <=== for testing purposes
-
-var loadedTheme = "";
+loadModule("login", document.body, () => {loadModule("main", document.body)}) // <=== for testing purposes
 
 /// Loads an HTML file and it's associated JS file, then appends the HTML in the innerHTML of the destination element
 /// The JS file gets appended to the head of the DOM
@@ -15,11 +13,12 @@ var loadedTheme = "";
 async function loadModule(filename, htmlDestination, ...moduleParams) {
     if (htmlDestination.id)
         unloadJSModule(Modules[htmlDestination.id])
-
+        
     console.log(`loading ${filename}`)
-    let htmlpromise = loadHTML(`/pages/${filename}/${filename}.html`);          // Load HTML
-    htmlpromise.then((v) => {htmlDestination.innerHTML = v});                   // Add the HTML to the destination element
-    await htmlpromise;                                                          // Wait for the HTML before loading the JS
+    await loadHTML(`/pages/${filename}/${filename}.html`).then((v) => {
+        htmlDestination.innerHTML = v
+    }); // Load HTML
+
     loadJSModule(filename, `pages/${filename}`, true, htmlDestination, moduleParams) // Load JS
 }
 
@@ -27,7 +26,7 @@ async function loadModule(filename, htmlDestination, ...moduleParams) {
 /// Params: Name of the theme (without extension or any of the sort)
 /// Return: void
 function loadTheme(name) {
-    loadedTheme = name;
+    globalStorage.loadedTheme = name;
     document.getElementById("CSSThemeFile").setAttribute("href", `/css/themes/${name}.css`)
 }
 
