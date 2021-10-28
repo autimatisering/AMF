@@ -35,7 +35,65 @@ moduleManager.ModuleRespository.demo = function () {
         // the second parameter is a STRING CONTAINING THE NAME OF THE FUNCTION
         // all that comes after the 2nd parameter, is used as parameters for the function you're calling
         let counter = this.rootNode.querySelector(".click-counter")
-        counter.innerHTML = Number.parseInt(counter.innerHTML) + increment
+        let clickval = Number.parseInt(counter.getAttribute("clickCounter"))
+        clickval += increment
+        counter.setAttribute("clickCounter", clickval)
+        switch (clickval) {
+            case 2:
+                counter.innerHTML = `2 times; dubbel click`
+                break;
+            case 3:
+                counter.innerHTML = `3 times; triple click`
+                break;
+            case 4:
+                counter.innerHTML = `4 times; multi click`
+                break;
+            case 5:
+                counter.innerHTML = `5 times; mega click - Clicking Spree!`
+                break;
+            case 6:
+                counter.innerHTML = `6 times; ultra click`
+                break;
+            case 7:
+                counter.innerHTML = `7 times; m-m-m-m-m-monster click!!`
+                break;
+            case 8:
+                counter.innerHTML = `8 times; l-l-l-l-l-ludicrous click!!`
+                break;
+            case 9:
+                counter.innerHTML = `9 times; HOLY SHIT!!!`
+                break;
+            case 10:
+                counter.innerHTML = `10 times - Rampage!`
+                break;
+            case 15:
+                counter.innerHTML = `15 times - Dominating!`
+                break;
+            case 20:
+                counter.innerHTML = `20 times - Unstoppable!`
+                break;
+            case 25:
+                counter.innerHTML = `25 times - Godlike!`
+                break;
+            case 30:
+                counter.innerHTML = `30 times - WICKED SICK!!`
+                break;
+            case 42:
+                counter.innerHTML = `life the universe and everything's meaning times`
+                break;
+            case 69:
+                counter.innerHTML = `nice times`
+                break;
+            case 616:
+                counter.innerHTML = `actual satanic times`
+                break;
+            case 666:
+                counter.innerHTML = `satanic times`
+                break;
+            default:
+                counter.innerHTML = `${clickval} times`
+                break;
+        }
     }
 
     return this;
