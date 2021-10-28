@@ -1,4 +1,37 @@
 <div>
     Demo Module <br>
-    <span class="demo"></span>
+    <div>
+        Welcome to AMF, this little demo will help you get started.<br>
+        Most you need to know is described in the code as comments.<br>
+    </div>
+    <br>
+    <div class="demo-wrap">
+        <span class="demo"></span>
+    </div>
+    <br>
+    <div class="btn" onclick="moduleExecute(this, 'domToJSDemo', 1)">
+        click me!
+    </div>
+
+    <div style="margin-top: 5px;">
+        you clicked the button <span class="click-counter">0</span> times
+    </div>
+    <br>
+    <div style="margin-top: 5px;">
+        There is more to be said about AMF, but the things shown here should help you get started
+    </div>
+    <br>
+    <div style="margin-top: 5px;">
+        Q: How did this module get loaded?<br>
+        A: In pageManager.js a starting module is set to load in (bottom of the file), in many regards this can be considered the start of your AMF app.<br>
+        <br>
+        <b>
+        Q: Why aren't you using ID's, aren't they better with JS?<br>
+        A: AMF can be used to load multiple identical modules simultaniously, using ID's would break this<br>
+        </b>
+        <br>
+        Q: Why are you using querySelector all the time?<br>
+        A: querySelector has been demonstrated to be the fastest and most efficient for retrieving a single element with a specific class.<br>
+        <br>
+    </div>
 </div>

@@ -1,4 +1,37 @@
 body {
     background-color: var(--HTMLBackground);
     color:white;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.demo-wrap {
+    padding: 10px;
+    background-color: #444;
+    border: solid 1px white;
+}
+
+.btn {
+    background-color: #020;
+    border: solid 1px #2A2;
+    box-shadow: 0px 0px 5px #2A2;
+    width: 120px;
+    height: 50px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #003800;
+    border: solid 1px #20D020;
+    box-shadow: 0px 0px 6px #20D020;
+}
+
+.btn:active {
+    background-color: #050;
+    border: solid 1px #2F2;
+    box-shadow: 0px 0px 7px #2F2;
+    transition: none;
 }
